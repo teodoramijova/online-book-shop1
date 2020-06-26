@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edited Books</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container w-50 h-50 p-5">
+    <form th:action="@{/books-saveBtn}" th:object="${book}" enctype="multipart/form-data" method="POST">
+        <h3>Form Book</h3>
+        <input type="hidden" th:field="*{ID}">
+        <div class="form-group">
+            <input th:field="*{bname}" type="text" class="form-control alert-danger" id="formGroupExampleInput" placeholder="Name">
+            <p th:if="${#fields.hasErrors('bname')}" th:errors="*{bname}"></p>
+
+        </div>
+        <div class="form-group">
+            <input type="number" id="edition" th:field="*{example}" class="form-control alert-danger">
+            <p th:if="${#fields.hasErrors('example')}" th:errors="*{example}"></p>
+
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <select th:field="*{categoryInt}" class="form-control btn-outline-danger">
+                        <option th:each="categorii : ${categories}" th:text="${categorii.NAME}" th:value="${categorii.ID}"></option>
+                    </select>
+                </div>
+                <div class="col mt-4">
+                    <input th:field="*{image}" class="form-group" id="uf" type="file">
+                </div>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-danger btn-lg btn-block">Save</button>
+        </div>
+    </form>
+        <br>
+        <br>
+        <li style="text-decoration: none; list-style: none"><a class="btn btn-outline-danger" th:href="@{/book}">Back to First Page</a></li>
+
+</div>
+</body>
+</html>
